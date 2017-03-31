@@ -1,6 +1,14 @@
 cmake_minimum_required(VERSION 3.0)
 project(Whyte)
 
+# Project options
+option(WHYTE_BUILD_UNIT_TESTS "Build the unit tests project for the Whyte engine." OFF)
+
+# Unit Tests
+if(WHYTE_BUILD_UNIT_TESTS)
+    add_subdirectory(tests)
+endif(WHYTE_BUILD_UNIT_TESTS)
+
 # Place targets into their own solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
