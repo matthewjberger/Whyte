@@ -4,10 +4,10 @@ Whyte is a small, structured game engine.
 
 ## Building Whyte
 
-First, clone the repo:
+First, clone the repo and its submodules:
 
 ```bash
-git clone https://github.com/matthewjberger/whyte
+git clone --recursive https://github.com/matthewjberger/whyte
 ```
 
 Then to build, use [CMake](https://cmake.org/):
@@ -55,7 +55,7 @@ vagrant plugin install vagrant-reload
 4.) Clone this repo with:
 
 ```bash
-git clone https://github.com/matthewjberger/whyte
+git clone --recursive https://github.com/matthewjberger/whyte
 cd whyte
 ```
 
