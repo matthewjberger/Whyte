@@ -78,4 +78,10 @@ if(MSVC)
     # Hide the console in visual studio projects in debug and release
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+
+    # Copy dependencies to output folder
+    add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+                                COMMAND ${CMAKE_COMMAND} -E copy
+                                $ENV{SDL2DIR}/lib/win32/SDL2.dll
+                                $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif(MSVC)
