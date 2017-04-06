@@ -19,14 +19,12 @@ set(CMAKE_CXX_STANDARD 14)
 # Set the cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-# Set the warning flags to pass to the compiler
-if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
-    if(NOT WIN32)
-        set(GLAD_LIBRARIES dl)
-    endif()
+# Disable all warnings 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+
+# GLAD requires libdl on Unix
+if(NOT WIN32)
+	set(GLAD_LIBRARIES dl) 
 endif()
 
 # Find Libraries
