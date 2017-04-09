@@ -1,6 +1,7 @@
 #pragma once
 
 #include "StateMachine.h"
+#include <memory>
 
 namespace whyte
 {
@@ -24,6 +25,8 @@ namespace whyte
     class Application
     {
     public:
+        Application() :
+            stateMachine_(std::make_unique<StateMachine>()) {}
         ~Application() { finalize(); }
 
         bool initialize(State*);

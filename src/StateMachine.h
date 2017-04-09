@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <memory>
 #include "State.h"
 #include "Event.h"
 
@@ -10,7 +9,6 @@ namespace whyte
     class StateMachine : public Subject<Event, EventInfo>
     {
     public:
-        explicit StateMachine(State*);
         ~StateMachine();
 
         void clear_states();

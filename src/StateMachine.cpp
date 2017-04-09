@@ -3,17 +3,6 @@
 using namespace std;
 using namespace whyte;
 
-StateMachine::StateMachine(State* initialState)
-{
-    if(!initialState)
-    {
-        // TODO: Log this error message
-        string errorMessage = "ERROR: StateMachine was created without an initial state.";
-        throw std::runtime_error(errorMessage);
-    }
-    change_state(initialState);
-}
-
 StateMachine::~StateMachine()
 {
     clear_states();

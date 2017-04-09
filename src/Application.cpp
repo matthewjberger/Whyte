@@ -9,8 +9,7 @@ bool Application::initialize(State* initialState)
     try
     {
         initialize_window();
-        stateMachine_ = std::make_unique<StateMachine>(initialState);
-
+        stateMachine_->change_state(initialState);
         stateMachine_->register_observer(Event::APPLICATION_EVENT, [this](const EventInfo& info)
         {
             if(info.app.type == ApplicationEvent::QUIT)
