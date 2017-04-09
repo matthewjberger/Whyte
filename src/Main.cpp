@@ -13,11 +13,11 @@ public:
     void on_resume() override {}
     void on_handle_events(SDL_Event* event) override 
     { 
-        if (event->type == SDL_QUIT || event->key.keysym.sym == SDLK_a)
+        if (event->key.keysym.sym == SDLK_a)
         {
             EventInfo info;
-            info.type = Event::APPLICATION_EVENT;
-            info.app.type = ApplicationEvent::QUIT;
+            info.type = Event::STATE_MACHINE_EVENT;
+            info.stateMachine.type = StateMachineEvent::POP_STATE;
             notify(info.type, info);
         } 
     }
@@ -47,7 +47,7 @@ public:
         {
             EventInfo info;
             info.type = Event::STATE_MACHINE_EVENT;
-            info.stateMachine.type = StateMachineEvent::CHANGE_STATE;
+            info.stateMachine.type = StateMachineEvent::PUSH_STATE;
             info.stateMachine.state = new GameStateB();
             notify(info.type, info);
         }

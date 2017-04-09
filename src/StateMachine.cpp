@@ -53,10 +53,17 @@ void StateMachine::push_state(State* state)
         case StateMachineEvent::CHANGE_STATE:
             change_state(info.stateMachine.state);
             break;
-        case StateMachineEvent::PUSH_STATE: break;
-        case StateMachineEvent::POP_STATE: break;
-        case StateMachineEvent::CLEAR_STATES: break;
-        default: ;
+        case StateMachineEvent::PUSH_STATE: 
+            push_state(info.stateMachine.state);
+            break;
+        case StateMachineEvent::POP_STATE: 
+            pop_state();
+            break;
+        case StateMachineEvent::CLEAR_STATES: 
+            clear_states();
+            break;
+        default:
+            break;
         }
     });
 
