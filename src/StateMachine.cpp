@@ -60,8 +60,6 @@ void StateMachine::push_state(State* state)
         }
     });
 
-
-
     states_.push_back(state);
     states_.back()->start();
 }
