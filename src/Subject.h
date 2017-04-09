@@ -21,7 +21,13 @@ namespace whyte
 
         void notify(const Event& event, const EventInfo& info) const
         {
-            for (const auto& observe : observers_.at(event)) observe(info);
+            if(observers_.count(event))
+            {
+                for (const auto& action : observers_.at(event)) 
+                {
+                    action(info);
+                }
+            }
         }
 
         // Prevent copy, move, and assignment

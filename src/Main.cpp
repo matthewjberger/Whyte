@@ -48,7 +48,7 @@ public:
             EventInfo info;
             info.type = Event::STATE_MACHINE_EVENT;
             info.stateMachine.type = StateMachineEvent::PUSH_STATE;
-            info.stateMachine.state = new GameStateB();
+            info.stateMachine.stateId = "stateB";
             notify(info.type, info);
         }
     }
@@ -57,9 +57,12 @@ public:
 
 int main(int argc, char* args[])
 {
-    State* state = new GameState();
+    auto state = std::make_unique<GameState>();
+    auto stateB = std::make_unique<GameStateB>();
     Application app;
-    app.initialize(state);
+    app.register_state<GameState>("stateA", move(state));
+    app.register_state<GameStateB>("stateB", move(stateB));
+    app.initialize("stateA");
     app.run();
     return 0;
 }

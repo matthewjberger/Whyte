@@ -4,19 +4,24 @@
 
 using namespace whyte;
 
-bool Application::initialize(State* initialState) 
+Application::Application()
+{
+    stateMachine_ = std::make_unique<StateMachine>();
+    stateMachine_->register_observer(Event::APPLICATION_EVENT, [this](const EventInfo& info)
+    {
+        if (info.app.type == ApplicationEvent::QUIT)
+        {
+            running = false;
+        }
+    });
+}
+
+bool Application::initialize(const std::string initialStateId) 
 {
     try
     {
         initialize_window();
-        stateMachine_->change_state(initialState);
-        stateMachine_->register_observer(Event::APPLICATION_EVENT, [this](const EventInfo& info)
-        {
-            if(info.app.type == ApplicationEvent::QUIT)
-            {
-                running = false;
-            }
-        });
+        stateMachine_->change_state(initialStateId);
     }
     catch( ... )
     {
@@ -64,6 +69,11 @@ void Application::initialize_window()
             }
         }
     }
+}
+
+void Application::unregister_state(const std::string stateId) const
+{
+    stateMachine_->unregister_state(stateId);
 }
 
 void Application::finalize() const

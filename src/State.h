@@ -18,8 +18,8 @@ namespace whyte
         void handle_events(SDL_Event* event);
         void update();
 
-        bool is_running() const { return running; }
-        bool is_paused() const { return paused; }
+        bool is_running() const { return running_; }
+        bool is_paused() const { return paused_; }
 
     private:
         virtual void on_start() = 0;
@@ -29,7 +29,7 @@ namespace whyte
         virtual void on_handle_events(SDL_Event* event) = 0;
         virtual void on_update() = 0;
 
-        bool running = false;
-        bool paused = false;
+        bool running_ = false;
+        bool paused_ = false;
     };
 }

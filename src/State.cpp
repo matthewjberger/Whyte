@@ -4,25 +4,25 @@ using namespace whyte;
 
 void State::start()
 {
-    running = true;
+    running_ = true;
     on_start();
 }
 
 void State::stop()
 {
-    running = false;
+    running_ = false;
     on_stop();
 }
 
 void State::pause()
 {
-    paused = true;
+    paused_ = true;
     on_pause();
 }
 
 void State::resume()
 {
-    paused = false;
+    paused_ = false;
     on_resume();
 }
 

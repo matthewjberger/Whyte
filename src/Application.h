@@ -25,16 +25,20 @@ namespace whyte
     class Application
     {
     public:
-        Application() :
-            stateMachine_(std::make_unique<StateMachine>()) {}
+        Application();
         ~Application() { finalize(); }
 
-        bool initialize(State*);
-        void initialize_window();
-        void finalize() const;
+        bool initialize(const std::string);
+
+        template <typename StateType>
+        void register_state(const std::string, std::unique_ptr<StateType>);
+        void unregister_state(const std::string) const;
+
         void run() const;
 
     private:
+        void initialize_window();
+        void finalize() const;
         void tick() const;
 
         std::unique_ptr<StateMachine> stateMachine_ = nullptr;
@@ -42,4 +46,10 @@ namespace whyte
         SDL_GLContext context_ = nullptr;
         bool running = true;
     };
+
+    template <typename StateType>
+    void Application::register_state(const std::string stateId, std::unique_ptr<StateType> state)
+    {
+        stateMachine_->register_state<StateType>(stateId, move(state));
+    }
 }

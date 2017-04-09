@@ -34,11 +34,10 @@ namespace whyte
         ApplicationEvent type;
     };
 
-    class State;
     struct StateMachineEventInfo
     {
         StateMachineEvent type;
-        State* state;
+        std::string stateId;
     };
 
     struct EventInfo
