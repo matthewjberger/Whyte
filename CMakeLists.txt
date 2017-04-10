@@ -37,7 +37,7 @@ include_directories(${SDL2_INCLUDE_DIR}
 # Create file globs
 file(GLOB_RECURSE HEADER_FILES src/*.h)
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
-file(GLOB_RECURSE CONFIG_FILES CMakeLists.txt
+file(GLOB CONFIG_FILES CMakeLists.txt
                        Readme.md
                        .gitignore)
 
@@ -48,6 +48,7 @@ source_group("Configs" FILES ${CONFIG_FILES})
 
 # Define renderer-specific file globs and groupings
 file(GLOB GLAD_SOURCE  third_party/glad/src/glad.c)
+source_group("Source\\Third Party\\glad" FILES ${GLAD_SOURCE})
 
 # Define the executable
 add_executable(${PROJECT_NAME}  ${HEADER_FILES}
