@@ -2,7 +2,7 @@
 
 #include "StateMachine.h"
 #include <memory>
-#include "Renderer.h"
+#include "Renderer/Renderer.h"
 
 namespace whyte
 {

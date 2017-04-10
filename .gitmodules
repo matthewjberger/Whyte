@@ -1,4 +1,4 @@
 [submodule "src/Renderer/OpenGL/glad"]
-	path = src/Renderer/OpenGL/glad
+	path = third_party/glad
 	url = https://github.com/Dav1dde/glad
 	branch = c

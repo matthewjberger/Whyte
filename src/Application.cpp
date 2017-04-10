@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "StateMachine.h"
-#include "RendererGL.h"
+#include "Renderer/OpenGL/RendererGL.h"
 
 using namespace whyte;
 
@@ -43,8 +43,8 @@ void Application::run() const
     SDL_StartTextInput();
     while (running)
     {
-        renderer_->clear_screen(0.97, 0.97, 1.0, 1.0);
         tick();
+        renderer_->clear_screen(0.97, 0.97, 1.0, 1.0);
         renderer_->tick();
     }
     SDL_StopTextInput();

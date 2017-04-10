@@ -19,12 +19,12 @@ set(CMAKE_CXX_STANDARD 14)
 # Set the cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-# Disable all warnings 
+# Disable all warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 # GLAD requires libdl on Unix
 if(NOT WIN32)
-	set(GLAD_LIBRARIES dl) 
+	set(GLAD_LIBRARIES dl)
 endif()
 
 # Find Libraries
@@ -32,12 +32,12 @@ find_package(SDL2 REQUIRED)
 
 # Add include directories
 include_directories(${SDL2_INCLUDE_DIR}
-                    src/Renderer/OpenGL/glad/include/)
+                    third_party/glad/include/)
 
 # Create file globs
-file(GLOB HEADER_FILES src/*.h)
-file(GLOB SOURCE_FILES src/*.cpp)
-file(GLOB CONFIG_FILES CMakeLists.txt
+file(GLOB_RECURSE HEADER_FILES src/*.h)
+file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
+file(GLOB_RECURSE CONFIG_FILES CMakeLists.txt
                        Readme.md
                        .gitignore)
 
@@ -47,8 +47,7 @@ source_group("Source" FILES ${SOURCE_FILES})
 source_group("Configs" FILES ${CONFIG_FILES})
 
 # Define renderer-specific file globs and groupings
-file(GLOB GLAD_SOURCE  src/Renderer/OpenGL/glad/src/glad.c)
-source_group("Source\\Renderer\\OpenGL\\glad" FILES ${GLAD_SOURCE})
+file(GLOB GLAD_SOURCE  third_party/glad/src/glad.c)
 
 # Define the executable
 add_executable(${PROJECT_NAME}  ${HEADER_FILES}

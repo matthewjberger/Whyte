@@ -7,12 +7,14 @@ using namespace whyte;
 void RendererGL::initialize_window()
 {
     // TODO: Move window management out to a separate class
+    // TODO: Log errors here instead of printf()
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         printf("SDL could not start! SDL Error: %s\n", SDL_GetError());
     }
     else
     {
+        // TODO: Auto-detect latest OpenGL version
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
         // This should be enabled if using the core profile for modern OpenGL
