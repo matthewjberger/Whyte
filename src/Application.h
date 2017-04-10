@@ -2,26 +2,10 @@
 
 #include "StateMachine.h"
 #include <memory>
+#include "Renderer.h"
 
 namespace whyte
 {
-    enum RENDERING_BACKEND
-    {
-        BACKEND_OPENGL
-    };
-
-    struct DisplayConfig
-    {
-        int x;
-        int y;
-        int width;
-        int height;
-        int bpp;
-        bool fullscreen;
-        bool visible;
-        RENDERING_BACKEND backend;
-    };
-
     class Application
     {
     public:
@@ -30,16 +14,15 @@ namespace whyte
         ~Application() { finalize(); }
 
         bool initialize(State*);
-        void initialize_window();
-        void finalize() const;
         void run() const;
 
+        std::unique_ptr<Renderer> renderer_ = nullptr;
+
     private:
+        void finalize() const;
         void tick() const;
 
         std::unique_ptr<StateMachine> stateMachine_ = nullptr;
-        SDL_Window* window_ = nullptr;
-        SDL_GLContext context_ = nullptr;
         bool running = true;
     };
 }
