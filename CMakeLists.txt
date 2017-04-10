@@ -6,11 +6,6 @@ option(WHYTE_BUILD_UNIT_TESTS "Build the unit tests for the Whyte engine." OFF)
 option(WHYTE_BUILD_DEMOS "Build the demo projects for the Whyte engine." OFF)
 option(WHYTE_BUILD_SANDBOX "Build an isolated, empty project that links against the Whyte engine." OFF)
 
-# Unit Tests
-if(WHYTE_BUILD_UNIT_TESTS)
-    add_subdirectory(tests)
-endif(WHYTE_BUILD_UNIT_TESTS)
-
 # Place targets into their own solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -20,9 +15,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 # Set the cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
-
-# Disable all warnings
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 # GLAD requires libdl on Unix
 if(NOT WIN32)
@@ -65,26 +57,38 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_strong_enums cxx_nullptr)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARY}
 											 ${GLAD_LIBRARIES})
 
-# Output to bin directory
 set_target_properties(${PROJECT_NAME} PROPERTIES
+
+	# Output to lib directory
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-)
 
-# Visual Studio specific settings
-# Requires CMake 3.8+
-if(MSVC)
-    # Hide the console in visual studio projects in debug and release
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
-endif(MSVC)
+	# Output to bin directory
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+
+	# Disable all warnings
+	CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w"
+)
 
 # Build shared libraries
 if(BUILD_SHARED_LIBS)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE "WHYTE_BUILD_DLL")
 	target_compile_definitions(${PROJECT_NAME} INTERFACE "WHYTE_DLL")
 endif(BUILD_SHARED_LIBS)
+
+# Visual Studio specific settings
+# Requires CMake 3.8+
+if(MSVC)
+    # Hide the console in visual studio projects in debug and release
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+		CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS"
+		CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+endif(MSVC)
+
+# Unit Tests
+if(WHYTE_BUILD_UNIT_TESTS)
+    add_subdirectory(tests)
+endif(WHYTE_BUILD_UNIT_TESTS)
 
 # Demos 
 if(WHYTE_BUILD_DEMOS)
