@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.0)
-project(Whyte)
+cmake_minimum_required(VERSION 3.1)
+project(Whyte VERSION 0.1.0 LANGUAGES CXX)
 
-# Project options
-option(WHYTE_BUILD_UNIT_TESTS "Build the unit tests project for the Whyte engine." OFF)
+# Project Options
+option(WHYTE_BUILD_UNIT_TESTS "Build the unit tests for the Whyte engine." OFF)
+option(WHYTE_BUILD_DEMOS "Build the demo projects for the Whyte engine." OFF)
+option(WHYTE_BUILD_SANDBOX "Build an isolated, empty project that links against the Whyte engine." OFF)
 
 # Unit Tests
 if(WHYTE_BUILD_UNIT_TESTS)
@@ -30,10 +32,6 @@ endif()
 # Find Libraries
 find_package(SDL2 REQUIRED)
 
-# Add include directories
-include_directories(${SDL2_INCLUDE_DIR}
-                    third_party/glad/include/)
-
 # Create file globs
 file(GLOB_RECURSE HEADER_FILES src/*.h)
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
@@ -51,35 +49,49 @@ file(GLOB GLAD_SOURCE  third_party/glad/src/glad.c)
 source_group("Source\\Third Party\\glad" FILES ${GLAD_SOURCE})
 
 # Define the executable
-add_executable(${PROJECT_NAME}  ${HEADER_FILES}
-                                ${SOURCE_FILES}
-                                ${CONFIG_FILES}
-                                ${GLAD_SOURCE})
+add_library(${PROJECT_NAME}	${HEADER_FILES}
+							${SOURCE_FILES}
+							${CONFIG_FILES}
+							${GLAD_SOURCE})
+
+# Add include directories
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIR}
+												  third_party/glad/include/)
+
+# List necessary compiler features
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_strong_enums cxx_nullptr)
 
 # Define the libraries to link against
-target_link_libraries(${PROJECT_NAME}   ${SDL2_LIBRARY}
-                                        ${GLAD_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARY}
+											 ${GLAD_LIBRARIES})
 
 # Output to bin directory
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+)
 
 # Visual Studio specific settings
 # Requires CMake 3.8+
 if(MSVC)
-    # Set the startup project
-    set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
-
-    # Set the working directory
-    set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/debug)
-
     # Hide the console in visual studio projects in debug and release
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
-
-    # Copy dependencies to output folder
-    add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
-                                COMMAND ${CMAKE_COMMAND} -E copy
-                                $ENV{SDL2DIR}/lib/win32/SDL2.dll
-                                $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif(MSVC)
+
+# Build shared libraries
+if(BUILD_SHARED_LIBS)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE "WHYTE_BUILD_DLL")
+	target_compile_definitions(${PROJECT_NAME} INTERFACE "WHYTE_DLL")
+endif(BUILD_SHARED_LIBS)
+
+# Demos 
+if(WHYTE_BUILD_DEMOS)
+    add_subdirectory(demos/window)
+endif(WHYTE_BUILD_DEMOS)
+
+# Sandbox
+if(WHYTE_BUILD_SANDBOX)
+    add_subdirectory(sandbox)
+endif(WHYTE_BUILD_SANDBOX)

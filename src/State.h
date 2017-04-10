@@ -1,12 +1,13 @@
 #pragma once
 
-#include <SDL.h>
 #include "Subject.h"
 #include "Event.h"
+#include "DllExport.h"
+#include <SDL.h>
 
 namespace whyte
 {
-    class State : public Subject<Event, EventInfo>
+    class WHYTE_API State : public Subject<Event, EventInfo>
     {
     public:
         virtual ~State() {}

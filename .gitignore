@@ -31,6 +31,7 @@
 # Output Files/Folders
 bin/*
 build/*
+lib/*
 
 # Vagrant Folder
 .vagrant/*

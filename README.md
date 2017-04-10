@@ -28,6 +28,8 @@ When you compile, the output will be placed in the `bin` directory.
 
 ### Build Options
 
+#### Unit Tests
+
 To build the unit tests, add this flag when generating build files with cmake:
 
 ```bash
@@ -35,6 +37,26 @@ To build the unit tests, add this flag when generating build files with cmake:
 ```
 
 Alternatively, you can select the `WHYTE_BUILD_UNIT_TESTS` option in the CMake GUI.
+
+#### Demo Projects
+
+To build the demo projects, add this flag when generating build files with cmake:
+
+```bash
+-DWHYTE_BUILD_DEMOS=ON
+```
+
+Alternatively, you can select the `WHYTE_BUILD_DEMOS` option in the CMake GUI.
+
+#### Sandbox
+
+To build an empty, isolated project that links agains the Whyte engine, add this flag when generating build files with cmake:
+
+```bash
+-DWHYTE_BUILD_SANDBOX=ON
+```
+
+Alternatively, you can select the `WHYTE_BUILD_SANDBOX` option in the CMake GUI.
 
 ## Vagrant
 

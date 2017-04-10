@@ -1,24 +1,24 @@
-cmake_minimum_required(VERSION 3.1)
-project(UnitTests)
+cmake_minimum_required(VERSION 3.0)
+project(Whyte_Example_Window)
 
 # Group files
-file(GLOB CATCH_HEADER catch.hpp)
+file(GLOB PROJECT_HEADERS *.h)
 file(GLOB PROJECT_SOURCES *.cpp)
 file(GLOB PROJECT_CONFIGS CMakeLists.txt)
 
 # Specify Visual Studio solution filters
-source_group("Catch" FILES ${CATCH_HEADER})
-source_group("Tests" FILES ${PROJECT_SOURCES})
+source_group("Headers" FILES ${PROJECT_HEADERS})
+source_group("Source" FILES ${PROJECT_SOURCES})
 source_group("Configs" FILES ${PROJECT_CONFIGS})
 
 # Specify the executable to create using the file globs
-add_executable(${PROJECT_NAME}  ${CATCH_HEADER}
+add_executable(${PROJECT_NAME}  ${PROJECT_HEADERS}
                                 ${PROJECT_SOURCES}
                                 ${PROJECT_CONFIGS})
 
 # Output to bin directory
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT_NAME})
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Demos/${PROJECT_NAME})
 
 # Set path to Whyte headers
 target_include_directories(${PROJECT_NAME} PRIVATE $<TARGET_PROPERTY:Whyte,INTERFACE_INCLUDE_DIRECTORIES>)
