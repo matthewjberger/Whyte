@@ -76,15 +76,6 @@ if(BUILD_SHARED_LIBS)
 	target_compile_definitions(${PROJECT_NAME} INTERFACE "WHYTE_DLL")
 endif(BUILD_SHARED_LIBS)
 
-# Visual Studio specific settings
-# Requires CMake 3.8+
-if(MSVC)
-    # Hide the console in visual studio projects in debug and release
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-		CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS"
-		CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
-endif(MSVC)
-
 # Unit Tests
 if(WHYTE_BUILD_UNIT_TESTS)
     add_subdirectory(tests)

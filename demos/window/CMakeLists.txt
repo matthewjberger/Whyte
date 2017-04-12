@@ -31,3 +31,13 @@ target_compile_features(${PROJECT_NAME} PRIVATE $<TARGET_PROPERTY:Whyte,INTERFAC
 
 # Use the interface compile definitions specified by Whyte
 target_compile_definitions(${PROJECT_NAME} INTERFACE $<TARGET_PROPERTY:Whyte,INTERFACE_COMPILE_DEFINITIONS>)
+
+# Visual Studio specific settings
+# Requires CMake 3.8+
+if(MSVC)
+    # Hide the console in visual studio projects in debug and release
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+		CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS"
+		CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+endif(MSVC)
+

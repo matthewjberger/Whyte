@@ -7,15 +7,15 @@
 
 namespace whyte
 {
-    class WHYTE_API Application
+    class Application
     {
     public:
-        Application() :
+        WHYTE_API Application() :
             stateMachine_(std::make_unique<StateMachine>()) {}
-        ~Application() { finalize(); }
+        WHYTE_API ~Application() { finalize(); }
 
-        bool initialize(State*);
-        void run() const;
+        WHYTE_API bool initialize(State*);
+        WHYTE_API void run() const;
 
     private:
         void finalize() const;

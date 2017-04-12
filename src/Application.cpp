@@ -44,7 +44,7 @@ void Application::run() const
     while (running)
     {
         tick();
-        renderer_->clear_screen(0.97, 0.97, 1.0, 1.0);
+        renderer_->clear_screen(0.97f, 0.97f, 1.0f, 1.0f);
         renderer_->tick();
     }
     SDL_StopTextInput();

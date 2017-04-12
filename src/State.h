@@ -7,20 +7,20 @@
 
 namespace whyte
 {
-    class WHYTE_API State : public Subject<Event, EventInfo>
+    class State : public Subject<Event, EventInfo>
     {
     public:
         virtual ~State() {}
 
-        void start();
-        void stop();
-        void pause();
-        void resume();
-        void handle_events(SDL_Event* event);
-        void update();
+        WHYTE_API void start();
+        WHYTE_API void stop();
+        WHYTE_API void pause();
+        WHYTE_API void resume();
+        WHYTE_API void handle_events(SDL_Event* event);
+        WHYTE_API void update();
 
-        bool is_running() const { return running; }
-        bool is_paused() const { return paused; }
+        WHYTE_API bool is_running() const { return running; }
+        WHYTE_API bool is_paused() const { return paused; }
 
     private:
         virtual void on_start() = 0;
