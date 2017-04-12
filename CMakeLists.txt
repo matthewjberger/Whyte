@@ -16,6 +16,9 @@ set(CMAKE_CXX_STANDARD 14)
 # Set the cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
+# Set the third party directory
+set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
+
 # GLAD requires libdl on Unix
 if(NOT WIN32)
 	set(GLAD_LIBRARIES dl)
@@ -37,7 +40,7 @@ source_group("Source" FILES ${SOURCE_FILES})
 source_group("Configs" FILES ${CONFIG_FILES})
 
 # Define renderer-specific file globs and groupings
-file(GLOB GLAD_SOURCE  third_party/glad/src/glad.c)
+file(GLOB GLAD_SOURCE  ${THIRD_PARTY_DIR}/glad/src/glad.c)
 source_group("Source\\Third Party\\glad" FILES ${GLAD_SOURCE})
 
 # Define the executable
@@ -48,7 +51,7 @@ add_library(${PROJECT_NAME}	${HEADER_FILES}
 
 # Add include directories
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIR}
-												  third_party/glad/include/)
+												  ${THIRD_PARTY_DIR}/glad/include/)
 
 # List necessary compiler features
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_strong_enums cxx_nullptr)
