@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(UnitTests)
+project(Unit_Tests)
 
 # Group files
 file(GLOB CATCH_HEADER catch.hpp)
