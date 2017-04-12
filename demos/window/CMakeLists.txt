@@ -37,7 +37,23 @@ target_compile_definitions(${PROJECT_NAME} INTERFACE $<TARGET_PROPERTY:Whyte,INT
 if(MSVC)
     # Hide the console in visual studio projects in debug and release
     set_target_properties(${PROJECT_NAME} PROPERTIES
-		CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS"
-		CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+		LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS" 
+		LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+
+	# Dynamically linked
+	if(BUILD_SHARED_LIBS) 
+		# Copy Whyte libraries to output folder
+		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+									COMMAND ${CMAKE_COMMAND} -E copy
+									$<TARGET_FILE:Whyte>
+									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+	# Statically linked
+	else() 
+		# Copy Whyte dependencies to output folder
+		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+									COMMAND ${CMAKE_COMMAND} -E copy
+									$ENV{SDL2DIR}/lib/win32/SDL2.dll
+									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+	endif(BUILD_SHARED_LIBS)
 endif(MSVC)
 
