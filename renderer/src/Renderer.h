@@ -2,12 +2,12 @@
 
 namespace whyte
 {
-    enum RENDERING_BACKEND
+    enum WHYRE_API RENDERING_BACKEND
     {
         BACKEND_OPENGL
     };
 
-    struct DisplayConfig
+    struct WHYRE_API DisplayConfig
     {
         int x;
         int y;
@@ -19,7 +19,7 @@ namespace whyte
         RENDERING_BACKEND backend;
     };
 
-    class Renderer
+    class WHYRE_API Renderer
     {
     public:
         virtual ~Renderer() {}
