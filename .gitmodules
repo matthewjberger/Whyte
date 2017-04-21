@@ -1,4 +1,4 @@
-[submodule "third_party/glad"]
-	path = third_party/glad
+[submodule "renderer/third_party/glad"]
+	path = renderer/third_party/glad
 	url = https://github.com/Dav1dde/glad
 	branch = c
