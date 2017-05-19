@@ -28,7 +28,7 @@ endif()
 find_package(SDL2 REQUIRED)
 
 # Create file globs
-file(GLOB_RECURSE HEADER_FILES src/*.h)
+file(GLOB_RECURSE HEADER_FILES include/*.h)
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
 file(GLOB CONFIG_FILES CMakeLists.txt
                        Readme.md
@@ -51,7 +51,8 @@ add_library(${PROJECT_NAME}	${HEADER_FILES}
 
 # Add include directories
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIR}
-												  ${THIRD_PARTY_DIR}/glad/include/)
+												  ${THIRD_PARTY_DIR}/glad/include/
+												  include)
 
 # List necessary compiler features
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_strong_enums cxx_nullptr)

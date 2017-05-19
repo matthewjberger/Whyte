@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DllExport.h"
+#include "internal/DllExport.h"
 
 namespace whyte
 {

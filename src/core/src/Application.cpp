@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "StateMachine.h"
-#include "../renderer/src/OpenGL/RendererGL.h"
+#include "RendererGL.h"
 
 using namespace whyte;
 

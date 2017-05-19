@@ -3,7 +3,7 @@
 #include "DllExport.h"
 #include "StateMachine.h"
 #include <memory>
-#include "../renderer/src/Renderer.h"
+#include "../../renderer/include/Renderer.h"
 
 namespace whyte
 {

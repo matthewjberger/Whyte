@@ -1,6 +1,6 @@
-#include "RendererGL.h"
 #include <cstdio>
 #include <glad/glad.h>
+#include "internal/backends/OpenGL/RendererGL.h"
 
 using namespace whyte;
 
