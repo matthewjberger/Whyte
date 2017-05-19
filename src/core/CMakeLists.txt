@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(Whyte VERSION 0.1.0 LANGUAGES CXX)
 
+# Set the cmake module path
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+
 # Find Libraries
 find_package(SDL2 REQUIRED)
 

@@ -13,12 +13,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_STANDARD 14)
 
-# Set the cmake module path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
-
-# Find Libraries
-find_package(SDL2 REQUIRED)
-
 # Build the window library
 #add_subdirectory(src/window)
 
