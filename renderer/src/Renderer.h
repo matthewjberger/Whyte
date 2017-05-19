@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DllExport.h"
+
 namespace whyte
 {
     enum WHYRE_API RENDERING_BACKEND
