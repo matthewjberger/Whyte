@@ -8,7 +8,7 @@ bool Application::initialize(State* initialState)
     try
     {
         // TODO: init renderer based on display config
-        renderer_ = std::make_unique<RendererGL>();
+        renderer_ = std::make_unique<whyre::RendererGL>();
         renderer_->initialize_window();
         stateMachine_->change_state(initialState);
         stateMachine_->register_observer(Event::APPLICATION_EVENT, [this](const EventInfo& info)

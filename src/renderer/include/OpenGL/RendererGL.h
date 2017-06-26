@@ -3,7 +3,7 @@
 #include <internal/Renderer.h>
 #include <SDL.h>
 
-namespace whyte
+namespace whyre
 {
     class WHYRE_API RendererGL : public Renderer
     {

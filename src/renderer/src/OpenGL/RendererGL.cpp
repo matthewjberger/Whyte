@@ -1,8 +1,11 @@
 #include <cstdio>
 #include <glad/glad.h>
 #include <OpenGL/RendererGL.h>
+#include "OpenGL/ShaderProgram.h"
+#include "OpenGL/VAO.h"
+#include "OpenGL/Buffer.h"
 
-using namespace whyte;
+using namespace whyre;
 
 void RendererGL::initialize_window()
 {
@@ -15,8 +18,8 @@ void RendererGL::initialize_window()
     else
     {
         // TODO: Auto-detect latest OpenGL version
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
         // This should be enabled if using the core profile for modern OpenGL
         //SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 

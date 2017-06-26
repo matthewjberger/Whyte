@@ -1,8 +1,8 @@
 #pragma once
 
-#include "DllExport.h"
+#include <internal/Includes.h>
 
-namespace whyte
+namespace whyre
 {
     enum WHYRE_API RENDERING_BACKEND
     {
@@ -28,6 +28,7 @@ namespace whyte
 
         // TODO: Take in a display config
         // TODO: Make the virtual members private (NVI)
+        // TODO: Make graphics types
         virtual void initialize_window() = 0;
         virtual void clear_screen(float r, float g, float b, float a) = 0;
         virtual void finalize() = 0;
