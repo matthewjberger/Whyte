@@ -35,11 +35,6 @@ target_compile_definitions(${PROJECT_NAME} INTERFACE $<TARGET_PROPERTY:Whyte,INT
 # Visual Studio specific settings
 # Requires CMake 3.8+
 if(MSVC)
-    # Hide the console in visual studio projects in debug and release
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-		LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS" 
-		LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
-
 	# Copy Whyte dependencies to output folder
 	# SDL2
 	add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD

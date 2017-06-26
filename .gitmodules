@@ -2,3 +2,6 @@
 	path = src/renderer/third_party/glad
 	url = https://github.com/Dav1dde/glad.git
     branch = c
+[submodule "src/renderer/third_party/glm"]
+	path = src/renderer/third_party/glm
+	url = https://github.com/g-truc/glm

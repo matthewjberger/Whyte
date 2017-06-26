@@ -52,6 +52,7 @@ add_library(${PROJECT_NAME}	${HEADER_FILES}
 # Add include directories
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIR}
 												  ${THIRD_PARTY_DIR}/glad/include/
+												  ${THIRD_PARTY_DIR}/glm/
 												  include)
 
 # List necessary compiler features
