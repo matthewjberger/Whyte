@@ -5,7 +5,7 @@
 
 namespace whyte
 {
-    class RendererGL : public Renderer
+    class WHYRE_API RendererGL : public Renderer
     {
     public:
         void initialize_window() override;
