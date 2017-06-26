@@ -31,3 +31,34 @@ target_compile_features(${PROJECT_NAME} PRIVATE $<TARGET_PROPERTY:Whyte,INTERFAC
 
 # Use the interface compile definitions specified by Whyte
 target_compile_definitions(${PROJECT_NAME} INTERFACE $<TARGET_PROPERTY:Whyte,INTERFACE_COMPILE_DEFINITIONS>)
+
+# Visual Studio specific settings
+# Requires CMake 3.8+
+if(MSVC)
+    # Hide the console in visual studio projects in debug and release
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+		LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS" 
+		LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+
+	# Copy Whyte dependencies to output folder
+	# SDL2
+	add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+								COMMAND ${CMAKE_COMMAND} -E copy
+								$ENV{SDL2DIR}/lib/win32/SDL2.dll
+								$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+	# Dynamically linked
+	if(BUILD_SHARED_LIBS) 
+		# Copy Whyte library to output folder
+		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+									COMMAND ${CMAKE_COMMAND} -E copy
+									$<TARGET_FILE:Whyte>
+									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+		# Copy Whyre library to output folder
+		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+									COMMAND ${CMAKE_COMMAND} -E copy
+									$<TARGET_FILE:Whyre>
+									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+	endif(BUILD_SHARED_LIBS)
+endif(MSVC)
