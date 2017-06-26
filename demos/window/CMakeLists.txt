@@ -40,19 +40,25 @@ if(MSVC)
 		LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS" 
 		LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
 
+	# Copy Whyte dependencies to output folder
+	# SDL2
+	add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
+								COMMAND ${CMAKE_COMMAND} -E copy
+								$ENV{SDL2DIR}/lib/win32/SDL2.dll
+								$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
 	# Dynamically linked
 	if(BUILD_SHARED_LIBS) 
-		# Copy Whyte libraries to output folder
+		# Copy Whyte library to output folder
 		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
 									COMMAND ${CMAKE_COMMAND} -E copy
 									$<TARGET_FILE:Whyte>
 									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
-	# Statically linked
-	else() 
-		# Copy Whyte dependencies to output folder
+
+		# Copy Whyre library to output folder
 		add_custom_command(TARGET   ${PROJECT_NAME} POST_BUILD
 									COMMAND ${CMAKE_COMMAND} -E copy
-									$ENV{SDL2DIR}/lib/win32/SDL2.dll
+									$<TARGET_FILE:Whyre>
 									$<TARGET_FILE_DIR:${PROJECT_NAME}>)
 	endif(BUILD_SHARED_LIBS)
 endif(MSVC)
