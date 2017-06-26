@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <glad/glad.h>
-#include "internal/backends/OpenGL/RendererGL.h"
+#include <OpenGL/RendererGL.h>
 
 using namespace whyte;
 
@@ -50,7 +50,7 @@ void RendererGL::initialize_window()
 void RendererGL::clear_screen(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void RendererGL::finalize()

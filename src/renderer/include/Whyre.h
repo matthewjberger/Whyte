@@ -1,4 +1,4 @@
 #pragma once
 
-#include "Renderer.h"
-#include "internal/backends/OpenGL/RendererGL.h"
+#include "internal/Renderer.h"
+#include "OpenGL/RendererGL.h"

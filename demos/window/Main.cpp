@@ -1,4 +1,4 @@
-#include "../../src/core/include/Whyte.h"
+#include <Whyte.h>
 
 using namespace whyte;
 
