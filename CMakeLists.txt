@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(MasterSolution VERSION 0.1.0 LANGUAGES CXX)
+project(MasterSolution VERSION 0.1.0)
 
 # Project Options
 option(WHYTE_BUILD_UNIT_TESTS "Build the unit tests for the Whyte engine." OFF)
